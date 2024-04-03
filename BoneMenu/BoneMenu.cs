@@ -25,7 +25,7 @@ namespace AdvancedAvatarControl.BoneMenu
         {
             MenuCategory menuMain = BoneLib.BoneMenu.MenuManager.CreateCategory("Advanced Avatar Control", Color.cyan);
             blendShapes = menuMain.CreateCategory("Blend Shapes", Color.green);
-            MenuCategory meshRenderersCategory = blendShapes.CreateCategory("Mesh Renderers", Color.green);
+            MenuCategory meshRenderersCategory = blendShapes.CreateCategory("Select Mesh Renderer", Color.green);
             MenuCategory eyeMovement = menuMain.CreateCategory("Eye Movement", Color.green);
 
             blendShapes.CreateFunctionElement("Refresh", Color.green, () => RefreshBlendShapes(blendShapes));
