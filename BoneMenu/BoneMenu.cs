@@ -123,6 +123,8 @@ namespace AdvancedAvatarControl.BoneMenu
             blendShapes.Elements.Clear();
 
             MenuCategory meshRenderersCategory = blendShapes.CreateCategory("Mesh Renderers", Color.green);
+            
+            meshRenderersCategory.CreateFunctionElement("Refresh", Color.green, () => RefreshMeshRenderers(meshRenderersCategory));
 
             blendShapes.CreateFunctionElement("Refresh", Color.green, () => RefreshBlendShapes(blendShapes));
 
