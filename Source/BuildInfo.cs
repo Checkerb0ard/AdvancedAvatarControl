@@ -1,4 +1,4 @@
-﻿namespace AdvancedAvatarControl
+namespace AdvancedAvatarControl
 {
     internal partial class MelonMod
     {

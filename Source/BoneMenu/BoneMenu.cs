@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using AdvancedAvatarControl.Patches;
 using MelonLoader;
@@ -123,11 +123,11 @@ namespace AdvancedAvatarControl.BoneMenu
             blendShapes.Elements.Clear();
 
             MenuCategory meshRenderersCategory = blendShapes.CreateCategory("Mesh Renderers", Color.green);
-            
+
             meshRenderersCategory.CreateFunctionElement("Refresh", Color.green, () => RefreshMeshRenderers(meshRenderersCategory));
 
             blendShapes.CreateFunctionElement("Refresh", Color.green, () => RefreshBlendShapes(blendShapes));
-
+            
             if (SelectedMeshRenderer != null && SelectedMeshRenderer.sharedMesh != null)
             {
                 int blendShapeCount = SelectedMeshRenderer.sharedMesh.blendShapeCount;
