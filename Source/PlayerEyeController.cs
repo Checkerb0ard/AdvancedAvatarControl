@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using MelonLoader;
 
 using AdvancedAvatarControl.BoneMenu;
@@ -8,7 +8,7 @@ using UnityEngine;
 namespace AdvancedAvatarControl
 {
     [RegisterTypeInIl2Cpp]
-    public class RepEyeController : MonoBehaviour
+    public class PlayerEyeController : MonoBehaviour
     {
         private Quaternion targetRotation;
 
@@ -26,6 +26,6 @@ namespace AdvancedAvatarControl
             transform.rotation = targetRotation;
         }
         
-        public RepEyeController(IntPtr ptr) : base(ptr) { }
+        public PlayerEyeController(IntPtr ptr) : base(ptr) { }
     }
 }
