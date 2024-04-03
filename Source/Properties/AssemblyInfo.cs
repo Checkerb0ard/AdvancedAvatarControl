@@ -1,17 +1,12 @@
-﻿using System.Reflection;
+using System.Reflection;
 using AdvancedAvatarControl;
 using LabFusion.SDK.Modules;
 using MelonLoader;
 using ModuleInfo = AdvancedAvatarControl.ModuleInfo;
 
-[assembly: AssemblyTitle(AdvancedAvatarControl.MelonMod.Description)]
 [assembly: AssemblyDescription(AdvancedAvatarControl.MelonMod.Description)]
-[assembly: AssemblyCompany(AdvancedAvatarControl.MelonMod.Company)]
-[assembly: AssemblyProduct(AdvancedAvatarControl.MelonMod.Name)]
 [assembly: AssemblyCopyright("Developed by " + AdvancedAvatarControl.MelonMod.Author)]
 [assembly: AssemblyTrademark(AdvancedAvatarControl.MelonMod.Company)]
-[assembly: AssemblyVersion(AdvancedAvatarControl.MelonMod.Version)]
-[assembly: AssemblyFileVersion(AdvancedAvatarControl.MelonMod.Version)]
 [assembly: MelonInfo(typeof(AdvancedAvatarControl.MelonMod), AdvancedAvatarControl.MelonMod.Name, AdvancedAvatarControl.MelonMod.Version, AdvancedAvatarControl.MelonMod.Author, AdvancedAvatarControl.MelonMod.DownloadLink)]
 [assembly: MelonColor(System.ConsoleColor.Cyan)]
 
