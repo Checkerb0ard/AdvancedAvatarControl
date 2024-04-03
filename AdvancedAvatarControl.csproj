@@ -83,5 +83,8 @@
       <HintPath>./References/UnityEngine.PhysicsModule.dll</HintPath>
     </Reference>
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Copy SourceFiles="$(TargetPath)" DestinationFolder="./References" />
+    <Message Text="Copied mod to references" Importance="high" />
+  </Target>
 </Project>
