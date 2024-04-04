@@ -83,6 +83,15 @@
       <HintPath>./References/UnityEngine.PhysicsModule.dll</HintPath>
     </Reference>
   </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="References\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Remove="References\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="References\**" />
+  </ItemGroup>
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
     <Copy SourceFiles="$(TargetPath)" DestinationFolder="./References" />
     <Message Text="Copied mod to references" Importance="high" />
