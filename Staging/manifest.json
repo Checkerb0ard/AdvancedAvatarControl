@@ -1,10 +1,9 @@
 {
     "name": "AdvancedAvatarControl",
-    "version_number": "1.0.1",
+    "version_number": "1.1.1",
     "website_url": "https://github.com/Checkerb0ard/AdvancedAvatarControl",
     "description": "A mod that allows you to control your avatar's blend shapes and enables eye movement!",
     "dependencies": [
-        "gnonme-BoneLib-2.4.0",
-	"Lakatrazz-Fusion-1.6.3"
+        "gnonme-BoneLib-2.4.0"
     ]
 }

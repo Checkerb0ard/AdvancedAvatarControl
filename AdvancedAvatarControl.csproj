@@ -70,6 +70,9 @@
     <Reference Include="UnityEngine">
       <HintPath>./References/UnityEngine.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.AssetBundleModule">
+      <HintPath>References\UnityEngine.AssetBundleModule.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.CoreModule">
       <HintPath>./References/UnityEngine.CoreModule.dll</HintPath>
     </Reference>
@@ -85,12 +88,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="References\**" />
+    <Compile Remove="Source\Internal\BundleLoader.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Remove="References\**" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="References\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Source\Internal\" />
   </ItemGroup>
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
     <Copy SourceFiles="$(TargetPath)" DestinationFolder="./References" />

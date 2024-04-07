@@ -6,9 +6,10 @@ A small mod to gain more control over your avatar!
 - Change blend shape values on avatars that have them
 - Fusion syncronization
 
+![](https://github.com/Checkerb0ard/AdvancedAvatarControl/blob/main/eyes.gif?raw=true)
+
 # Known Issues
-- Blend shapes might be a bit finicky in mirrors in Fusion with other players who have the same avatar. This is untested, but by looking at the code, it's obvious that it can happen.
-- The player's head movement will be very slow while in time scale, therefore causing your neck to 'break'.
+- Slowmo still might break your neck but it's 200% better than before
 
 # Credits
 - Plyshka - Helped with code clean up and refactoring
@@ -17,3 +18,5 @@ If you have any issues or suggestions, feel free to DM me on Discord: `checkerbo
 
 # Change Log
 - 1.0.1 - Readme changes
+- 1.1.0 - Somewhat fixed slowmo neck breaking
+- 1.1.1 - Fixed head freezing when unpausing the game

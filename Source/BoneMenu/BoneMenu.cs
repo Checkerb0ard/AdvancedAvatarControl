@@ -34,7 +34,7 @@ namespace AdvancedAvatarControl.BoneMenu
 #if DEBUG
             eyeMovement.CreateFunctionElement("Add Component", Color.green, () =>
             {
-                if (Player.playerHead.gameObject.GetComponent<PlayerEyeController>() != null)
+                if (Player.playerHead.gameObject.AddComponent<PlayerEyeController>() != null)
                 {
                     MelonLogger.Msg("PlayerEyeController already exists");
                     BoneLib.Notifications.Notifier.Send(new BoneLib.Notifications.Notification()
@@ -51,7 +51,7 @@ namespace AdvancedAvatarControl.BoneMenu
             });
             eyeMovement.CreateFunctionElement("Remove Component", Color.red, () =>
             {
-                if (Player.playerHead.gameObject.GetComponent<PlayerEyeController>() == null)
+                if (Player.playerHead.gameObject.AddComponent<PlayerEyeController>() == null)
                 {
                     MelonLogger.Msg("PlayerEyeController does not exist");
                     BoneLib.Notifications.Notifier.Send(new BoneLib.Notifications.Notification()
@@ -69,7 +69,7 @@ namespace AdvancedAvatarControl.BoneMenu
             });
 #endif
 
-            eyeMovement.CreateFloatElement("Movement Speed", Color.white, Prefs.EyeMovementSpeed.Value, 5, 5, 25, (float value) =>
+            eyeMovement.CreateFloatElement("Movement Speed", Color.white, Prefs.EyeMovementSpeed.Value, 1, 1, 25, (float value) =>
             {
                 PlayerEyeController playerEyeController =
                     Player.playerHead.gameObject.GetComponent<PlayerEyeController>();
@@ -122,7 +122,7 @@ namespace AdvancedAvatarControl.BoneMenu
         {
             blendShapes.Elements.Clear();
 
-            MenuCategory meshRenderersCategory = blendShapes.CreateCategory("Mesh Renderers", Color.green);
+            MenuCategory meshRenderersCategory = blendShapes.CreateCategory("Select Mesh Renderer", Color.green);
 
             meshRenderersCategory.CreateFunctionElement("Refresh", Color.green, () => RefreshMeshRenderers(meshRenderersCategory));
 

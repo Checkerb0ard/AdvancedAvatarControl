@@ -21,11 +21,17 @@ namespace AdvancedAvatarControl
         {
             Quaternion desiredRotation = gameObject.transform.rotation;
             
-            targetRotation = Quaternion.Lerp(targetRotation, desiredRotation, Prefs.EyeMovementSpeed.Value * Time.deltaTime * Time.timeScale);
+            float lerpParameter = 0;
+            if (Time.timeScale != 0)
+            {
+                lerpParameter = Prefs.EyeMovementSpeed.Value * Time.deltaTime / Time.timeScale;
+            }
+
+            targetRotation = Quaternion.Lerp(targetRotation, desiredRotation, lerpParameter);
             
             transform.rotation = targetRotation;
         }
-        
+
         public PlayerEyeController(IntPtr ptr) : base(ptr) { }
     }
 }

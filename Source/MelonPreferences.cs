@@ -15,7 +15,7 @@ namespace AdvancedAvatarControl
 
         public static void Initialize()
         {
-            EyeMovementSpeed = MainCategory.GetEntry<float>("Eye Movement Speed") ?? MainCategory.CreateEntry<float>("Eye Movement Speed", 15f, "Eye Movement Speed");
+            EyeMovementSpeed = MainCategory.GetEntry<float>("Eye Movement Speed") ?? MainCategory.CreateEntry<float>("Eye Movement Speed", 10f, "Eye Movement Speed");
 
             MainCategory.SetFilePath(MelonUtils.UserDataDirectory + "/AdvancedAvatarControl.cfg");
             MainCategory.SaveToFile(false);
