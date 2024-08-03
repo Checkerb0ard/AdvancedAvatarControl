@@ -10,7 +10,7 @@ using UnityEngine;
 
 namespace AdvancedAvatarControl.Messages
 {
-    public class BlendBones
+    public class BlendShapes
     {
         public class BasicNumericData : IFusionSerializable, IDisposable
         {
