@@ -1,15 +1,9 @@
-using System.Linq;
 using MelonLoader;
 using System.Reflection;
 
-using AdvancedAvatarControl.BoneMenu;
-using AdvancedAvatarControl.Patches;
-
 using BoneLib;
-using Il2CppSystem;
 using LabFusion.SDK.Modules;
-using LabFusion.Utilities;
-using SLZ.Rig;
+using Il2CppSLZ.Marrow;
 
 namespace AdvancedAvatarControl
 {
@@ -31,21 +25,21 @@ namespace AdvancedAvatarControl
         public override void OnLateInitializeMelon()
         {
             BoneMenu.BoneMenu.CreateBoneMenu();
-            Hooking.OnLevelInitialized += AddEyeMovement;
+            Hooking.OnLevelLoaded += AddEyeMovement;
             Hooking.OnSwitchAvatarPostfix += BoneMenu.BoneMenu.OnSwitchAvatar;
-            MultiplayerHooking.OnPlayerRepCreated += AddRepEyeMovement;
+            //MultiplayerHooking.OnPlayerRepCreated += AddRepEyeMovement; TODO Fusion Patch 5 beta lacks the requisite hook
 
             FusionInstalled = HelperMethods.CheckIfAssemblyLoaded("labfusion");
         }
         
         public void AddEyeMovement(LevelInfo levelInfo)
         {
-            if (Player.playerHead.gameObject.GetComponent<PlayerEyeController>() != null)
+            if (Player.Head.gameObject.GetComponent<PlayerEyeController>() != null)
             {
                 MelonLogger.Msg("PlayerEyeController already exists");
                 return;
             }
-            Player.playerHead.gameObject.AddComponent<PlayerEyeController>();
+            Player.Head.gameObject.AddComponent<PlayerEyeController>();
 #if DEBUG            
             MelonLogger.Msg("PlayerEyeController added to RigManager");
 #endif            

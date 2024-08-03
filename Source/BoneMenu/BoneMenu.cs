@@ -4,11 +4,11 @@ using AdvancedAvatarControl.Patches;
 using MelonLoader;
 
 using BoneLib;
-using BoneLib.BoneMenu.Elements;
 using BoneLib.Notifications;
 using LabFusion.Network;
-using SLZ.VRMK;
 using UnityEngine;
+using BoneLib.BoneMenu;
+using Il2CppSLZ.VRMK;
 
 namespace AdvancedAvatarControl.BoneMenu
 {
@@ -16,25 +16,25 @@ namespace AdvancedAvatarControl.BoneMenu
     {
         public static SkinnedMeshRenderer SelectedMeshRenderer;
         public static SkinnedMeshRenderer[] SkinnedMeshRenderers;
-        private static MenuCategory blendShapes;
-        private static MenuCategory meshRenderersMenu;
+        private static Page blendShapes;
+        private static Page meshRenderersMenu;
 
         private static Dictionary<int, List<float>> initialBlendShapeWeights = new Dictionary<int, List<float>>();
 
         public static void CreateBoneMenu()
         {
-            MenuCategory menuMain = BoneLib.BoneMenu.MenuManager.CreateCategory("Advanced Avatar Control", Color.cyan);
-            blendShapes = menuMain.CreateCategory("Blend Shapes", Color.green);
-            MenuCategory meshRenderersCategory = blendShapes.CreateCategory("Select Mesh Renderer", Color.green);
-            MenuCategory eyeMovement = menuMain.CreateCategory("Eye Movement", Color.green);
+            Page menuMain = Menu.CreatePage("Advanced Avatar Control", Color.cyan);
+            blendShapes = menuMain.CreatePage("Blend Shapes", Color.green, maxElements: 9); //TODO temporarily set maxElements to 9 to fix https://github.com/yowchap/BoneLib/issues/70, though https://github.com/yowchap/BoneLib/issues/71 means elements on subpages aren't removed
+            Page meshRenderersCategory = blendShapes.CreatePage("Select Mesh Renderer", Color.green, maxElements: 9); //TODO temporarily set maxElements to 9 to fix https://github.com/yowchap/BoneLib/issues/70, though https://github.com/yowchap/BoneLib/issues/71 means elements on subpages aren't removed
+            Page eyeMovement = menuMain.CreatePage("Eye Movement", Color.green);
 
-            blendShapes.CreateFunctionElement("Refresh", Color.green, () => RefreshBlendShapes(blendShapes));
-            meshRenderersCategory.CreateFunctionElement("Refresh", Color.green, () => RefreshMeshRenderers(meshRenderersCategory));
+            blendShapes.CreateFunction("Refresh", Color.green, () => RefreshBlendShapes(blendShapes));
+            meshRenderersCategory.CreateFunction("Refresh", Color.green, () => RefreshMeshRenderers(meshRenderersCategory));
 
 #if DEBUG
-            eyeMovement.CreateFunctionElement("Add Component", Color.green, () =>
+            eyeMovement.CreateFunction("Add Component", Color.green, () =>
             {
-                if (Player.playerHead.gameObject.AddComponent<PlayerEyeController>() != null)
+                if (Player.Head.gameObject.AddComponent<PlayerEyeController>() != null)
                 {
                     MelonLogger.Msg("PlayerEyeController already exists");
                     BoneLib.Notifications.Notifier.Send(new BoneLib.Notifications.Notification()
@@ -47,11 +47,11 @@ namespace AdvancedAvatarControl.BoneMenu
                     return;
                 }
 
-                Player.playerHead.gameObject.AddComponent<PlayerEyeController>();
+                Player.Head.gameObject.AddComponent<PlayerEyeController>();
             });
-            eyeMovement.CreateFunctionElement("Remove Component", Color.red, () =>
+            eyeMovement.CreateFunction("Remove Component", Color.red, () =>
             {
-                if (Player.playerHead.gameObject.AddComponent<PlayerEyeController>() == null)
+                if (Player.Head.gameObject.AddComponent<PlayerEyeController>() == null)
                 {
                     MelonLogger.Msg("PlayerEyeController does not exist");
                     BoneLib.Notifications.Notifier.Send(new BoneLib.Notifications.Notification()
@@ -64,15 +64,15 @@ namespace AdvancedAvatarControl.BoneMenu
                     return;
                 }
 
-                Player.playerHead.gameObject.GetComponent<PlayerEyeController>().enabled = false;
-                UnityEngine.Object.Destroy(Player.playerHead.gameObject.GetComponent<PlayerEyeController>());
+                Player.Head.gameObject.GetComponent<PlayerEyeController>().enabled = false;
+                UnityEngine.Object.Destroy(Player.Head.gameObject.GetComponent<PlayerEyeController>());
             });
 #endif
 
-            eyeMovement.CreateFloatElement("Movement Speed", Color.white, Prefs.EyeMovementSpeed.Value, 1, 1, 25, (float value) =>
+            eyeMovement.CreateFloat("Movement Speed", Color.white, Prefs.EyeMovementSpeed.Value, 1, 1, 25, (float value) =>
             {
                 PlayerEyeController playerEyeController =
-                    Player.playerHead.gameObject.GetComponent<PlayerEyeController>();
+                    Player.Head.gameObject.GetComponent<PlayerEyeController>();
                 if (playerEyeController != null)
                 {
                     Prefs.EyeMovementSpeed.Value = value;
@@ -91,17 +91,17 @@ namespace AdvancedAvatarControl.BoneMenu
             });
         }
 
-        public static void RefreshMeshRenderers(MenuCategory meshRenderersCategory)
+        public static void RefreshMeshRenderers(Page meshRenderersCategory)
         {
-            meshRenderersCategory.Elements.Clear();
+            meshRenderersCategory.RemoveAll();
 
-            meshRenderersCategory.CreateFunctionElement("Refresh", Color.green, () => RefreshMeshRenderers(meshRenderersCategory));
+            meshRenderersCategory.CreateFunction("Refresh", Color.green, () => RefreshMeshRenderers(meshRenderersCategory));
 
-            SkinnedMeshRenderers = Player.GetCurrentAvatar().gameObject.GetComponentsInChildren<SkinnedMeshRenderer>();
+            SkinnedMeshRenderers = Player.Avatar.gameObject.GetComponentsInChildren<SkinnedMeshRenderer>();
 
             foreach (var skinnedMeshRenderer in SkinnedMeshRenderers)
             {
-                meshRenderersCategory.CreateFunctionElement(skinnedMeshRenderer.gameObject.name, Color.white, () =>
+                meshRenderersCategory.CreateFunction(skinnedMeshRenderer.gameObject.name, Color.white, () =>
                 {
                     SelectedMeshRenderer = skinnedMeshRenderer;
                     
@@ -118,15 +118,15 @@ namespace AdvancedAvatarControl.BoneMenu
             }
         }
 
-        public static void RefreshBlendShapes(MenuCategory blendShapes)
+        public static void RefreshBlendShapes(Page blendShapes)
         {
-            blendShapes.Elements.Clear();
+            blendShapes.RemoveAll();
 
-            MenuCategory meshRenderersCategory = blendShapes.CreateCategory("Select Mesh Renderer", Color.green);
+            Page meshRenderersCategory = blendShapes.CreatePage("Select Mesh Renderer", Color.green, maxElements: 9); //TODO temporarily set maxElements to 9 to fix https://github.com/yowchap/BoneLib/issues/70, though https://github.com/yowchap/BoneLib/issues/71 means elements on subpages aren't removed
 
-            meshRenderersCategory.CreateFunctionElement("Refresh", Color.green, () => RefreshMeshRenderers(meshRenderersCategory));
+            meshRenderersCategory.CreateFunction("Refresh", Color.green, () => RefreshMeshRenderers(meshRenderersCategory));
 
-            blendShapes.CreateFunctionElement("Refresh", Color.green, () => RefreshBlendShapes(blendShapes));
+            blendShapes.CreateFunction("Refresh", Color.green, () => RefreshBlendShapes(blendShapes));
             
             if (SelectedMeshRenderer != null && SelectedMeshRenderer.sharedMesh != null)
             {
@@ -136,7 +136,7 @@ namespace AdvancedAvatarControl.BoneMenu
                     float weight = SelectedMeshRenderer.GetBlendShapeWeight(i);
                     string blendShapeName = SelectedMeshRenderer.sharedMesh.GetBlendShapeName(i);
 
-                    FloatElement floatElement = blendShapes.CreateFloatElement(blendShapeName, Color.white, weight, 10,
+                    FloatElement floatElement = blendShapes.CreateFloat(blendShapeName, Color.white, weight, 10,
                         0, 100, (float value) =>
                         {
                             if (MelonMod.FusionInstalled && NetworkInfo.HasServer)

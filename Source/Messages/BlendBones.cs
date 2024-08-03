@@ -1,10 +1,11 @@
 using System;
 using AdvancedAvatarControl.Patches;
 using BoneLib;
+using Il2CppSLZ.VRMK;
 using LabFusion.Data;
 using LabFusion.Network;
+using LabFusion.Player;
 using LabFusion.Representation;
-using SLZ.VRMK;
 using UnityEngine;
 
 namespace AdvancedAvatarControl.Messages
@@ -76,12 +77,12 @@ namespace AdvancedAvatarControl.Messages
 
                             if (shortId == PlayerIdManager.LocalSmallId)
                             {
-                                avatar = Player.GetCurrentAvatar();
+                                avatar = Player.Avatar;
                             }
                             else
                             {
-                                PlayerRepManager.TryGetPlayerRep(shortId, out PlayerRep playerRep);
-                                avatar = playerRep.RigReferences.RigManager.avatar;
+                                PlayerRepUtilities.TryGetReferences(shortId, out RigReferenceCollection playerRep);
+                                avatar = playerRep.RigManager.avatar;
                             }
                             
                             if (avatar != null)

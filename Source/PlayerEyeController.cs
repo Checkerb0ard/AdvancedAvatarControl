@@ -1,8 +1,6 @@
 using System;
 using MelonLoader;
 
-using AdvancedAvatarControl.BoneMenu;
-
 using UnityEngine;
 
 namespace AdvancedAvatarControl
