@@ -1,9 +1,6 @@
 using MelonLoader;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using MelonLoader.Utils;
+using System.IO;
 
 namespace AdvancedAvatarControl
 {
@@ -17,7 +14,7 @@ namespace AdvancedAvatarControl
         {
             EyeMovementSpeed = MainCategory.GetEntry<float>("Eye Movement Speed") ?? MainCategory.CreateEntry<float>("Eye Movement Speed", 10f, "Eye Movement Speed");
 
-            MainCategory.SetFilePath(MelonUtils.UserDataDirectory + "/AdvancedAvatarControl.cfg");
+            MainCategory.SetFilePath(Path.Combine(MelonEnvironment.UserDataDirectory, "AdvancedAvatarControl.cfg"));
             MainCategory.SaveToFile(false);
         }
     }

@@ -1,9 +1,8 @@
 using System;
 using AdvancedAvatarControl.Messages;
 using LabFusion.Network;
-using LabFusion.Representation;
+using LabFusion.Player;
 using LabFusion.SDK.Modules;
-using UnityEngine;
 
 namespace AdvancedAvatarControl
 {

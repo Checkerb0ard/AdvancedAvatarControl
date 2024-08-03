@@ -1,10 +1,10 @@
 using System.Linq;
-using AdvancedAvatarControl.BoneMenu;
 using BoneLib;
 using HarmonyLib;
 using UnityEngine;
 using MelonLoader;
-using SLZ.VRMK;
+using Il2CppSLZ.Marrow;
+using Il2CppSLZ.VRMK;
 
 namespace AdvancedAvatarControl.Patches
 {
@@ -25,7 +25,7 @@ namespace AdvancedAvatarControl.Patches
                 return;
             foreach (Avatar item in Object.FindObjectsOfType<Avatar>())
             {
-                if (((Object)((Component)item)).name == Player.GetCurrentAvatar().gameObject.name)
+                if (((Object)((Component)item)).name == Player.Avatar.gameObject.name)
                 {
                     SkinnedMeshRenderer skinnedMeshRenderer = item.gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
                     if (skinnedMeshRenderer != null && skinnedMeshRenderer.sharedMesh != null)
