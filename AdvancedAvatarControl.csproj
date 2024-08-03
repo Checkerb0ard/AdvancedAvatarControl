@@ -1,90 +1,33 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{0DEB755F-D57A-4285-9D70-C592E340CDB4}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <RootNamespace>AdvancedAvatarControl</RootNamespace>
-    <AssemblyName>AdvancedAvatarControl</AssemblyName>
-    <AssemblyTitle>More control over your avatar!</AssemblyTitle>
-    <Version>1.0.0</Version>
-    <TargetFramework>net472</TargetFramework>
-    <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <Deterministic>true</Deterministic>
-    <LangVersion>9</LangVersion>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin/Debug/</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin/Release/</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <TargetFramework>net6</TargetFramework>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="0Harmony">
-      <HintPath>./References/0Harmony.dll</HintPath>
-    </Reference>
     <Reference Include="Assembly-CSharp">
-      <HintPath>./References/Assembly-CSharp.dll</HintPath>
+      <HintPath>$(BONELAB_PATH)\MelonLoader\Il2CppAssemblies\Assembly-CSharp.dll</HintPath>
     </Reference>
     <Reference Include="BoneLib">
-      <HintPath>./References/BoneLib.dll</HintPath>
+      <HintPath>$(BONELAB_PATH)\Mods\BoneLib.dll</HintPath>
     </Reference>
     <Reference Include="Il2Cppmscorlib">
-      <HintPath>./References/Il2Cppmscorlib.dll</HintPath>
-    </Reference>
-    <Reference Include="LabFusion">
-      <HintPath>./References/LabFusion.dll</HintPath>
+      <HintPath>$(BONELAB_PATH)\MelonLoader\Il2CppAssemblies\Il2Cppmscorlib.dll</HintPath>
     </Reference>
     <Reference Include="MelonLoader">
-      <HintPath>./References/MelonLoader.dll</HintPath>
+      <HintPath>$(BONELAB_PATH)\MelonLoader\net6\MelonLoader.dll</HintPath>
     </Reference>
-    <Reference Include="SLZ.Algorithms">
-      <HintPath>./References/SLZ.Algorithms.dll</HintPath>
+    <Reference Include="Il2CppSLZ.Marrow">
+      <HintPath>$(BONELAB_PATH)\MelonLoader\Il2CppAssemblies\Il2CppSLZ.Marrow.dll</HintPath>
     </Reference>
-    <Reference Include="SLZ.Marrow">
-      <HintPath>./References/SLZ.Marrow.dll</HintPath>
-    </Reference>
-    <Reference Include="SLZ.Marrow.SDK">
-      <HintPath>./References/SLZ.Marrow.SDK.dll</HintPath>
-    </Reference>
-    <Reference Include="SLZ.Serialize">
-      <HintPath>./References/SLZ.Serialize.dll</HintPath>
-    </Reference>
-    <Reference Include="UnhollowerBaseLib">
-      <HintPath>./References/UnhollowerBaseLib.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine">
-      <HintPath>./References/UnityEngine.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.AssetBundleModule">
-      <HintPath>References\UnityEngine.AssetBundleModule.dll</HintPath>
+    <Reference Include="Il2CppInterop.Runtime">
+      <HintPath>$(BONELAB_PATH)\MelonLoader\net6\Il2CppInterop.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.CoreModule">
-      <HintPath>./References/UnityEngine.CoreModule.dll</HintPath>
+      <HintPath>$(BONELAB_PATH)\MelonLoader\Il2CppAssemblies\UnityEngine.CoreModule.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.InputLegacyModule">
-      <HintPath>./References/UnityEngine.InputLegacyModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.InputModule">
-      <HintPath>./References/UnityEngine.InputModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.PhysicsModule">
-      <HintPath>./References/UnityEngine.PhysicsModule.dll</HintPath>
-    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="AdvancedAvatarControl.csproj.user" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="References\**" />
@@ -95,9 +38,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="References\**" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Source\Internal\" />
   </ItemGroup>
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
     <Copy SourceFiles="$(TargetPath)" DestinationFolder="./References" />
