@@ -4,6 +4,7 @@ using System.Reflection;
 using BoneLib;
 using LabFusion.SDK.Modules;
 using Il2CppSLZ.Marrow;
+using LabFusion.Entities;
 
 namespace AdvancedAvatarControl
 {
@@ -27,9 +28,8 @@ namespace AdvancedAvatarControl
             BoneMenu.BoneMenu.CreateBoneMenu();
             Hooking.OnLevelLoaded += AddEyeMovement;
             Hooking.OnSwitchAvatarPostfix += BoneMenu.BoneMenu.OnSwitchAvatar;
-            //MultiplayerHooking.OnPlayerRepCreated += AddRepEyeMovement; TODO Fusion Patch 5 beta lacks the requisite hook
-
             FusionInstalled = HelperMethods.CheckIfAssemblyLoaded("labfusion");
+            if (FusionInstalled) NetworkPlayer.OnNetworkRigCreated += AddRepEyeMovement;
         }
         
         public void AddEyeMovement(LevelInfo levelInfo)
@@ -45,7 +45,7 @@ namespace AdvancedAvatarControl
 #endif            
         }
         
-        public void AddRepEyeMovement(RigManager playerRep)
+        public void AddRepEyeMovement(NetworkPlayer player, RigManager playerRep)
         {
 #if DEBUG            
             MelonLogger.Msg($"RepEyeController added to {playerRep.name}");

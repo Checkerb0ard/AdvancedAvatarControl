@@ -8,7 +8,7 @@ using ModuleInfo = AdvancedAvatarControl.ModuleInfo;
 [assembly: AssemblyCopyright("Developed by " + AdvancedAvatarControl.MelonMod.Author)]
 [assembly: AssemblyTrademark(AdvancedAvatarControl.MelonMod.Company)]
 [assembly: MelonInfo(typeof(AdvancedAvatarControl.MelonMod), AdvancedAvatarControl.MelonMod.Name, AdvancedAvatarControl.MelonMod.Version, AdvancedAvatarControl.MelonMod.Author, AdvancedAvatarControl.MelonMod.DownloadLink)]
-[assembly: MelonColor(System.ConsoleColor.Cyan)]
+[assembly: MelonColor(0xFF, 0x00, 0xFF, 0xFF)]
 
 [assembly: LabFusion.SDK.Modules.ModuleInfo(typeof(FusionModule), ModuleInfo.Name, ModuleInfo.Version, ModuleInfo.Author, ModuleInfo.Abbreviation, ModuleInfo.AutoRegister, ModuleInfo.Color)]
 
