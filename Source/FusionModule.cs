@@ -27,13 +27,13 @@ namespace AdvancedAvatarControl
             LoggerInstance.Log("Module was loaded!");
         }
 
-        public void SendBlendBoneMessage(float boneData, int boneIndex)
+        public void SendBlendShapeMessage(float boneData, int boneIndex)
         {
             using var writer = FusionWriter.Create();
-            using var data = BlendBones.BasicNumericData.Create(boneIndex, boneData, PlayerIdManager.LocalSmallId);
+            using var data = BlendShapes.BasicNumericData.Create(boneIndex, boneData, PlayerIdManager.LocalSmallId);
             writer.Write(data);
 
-            using var message = FusionMessage.ModuleCreate<BlendBones.BasicNumericMessage>(writer);
+            using var message = FusionMessage.ModuleCreate<BlendShapes.BasicNumericMessage>(writer);
             MessageSender.SendToServer(NetworkChannel.Reliable, message);
         }
     }

@@ -24,8 +24,9 @@ namespace AdvancedAvatarControl.BoneMenu
         public static void CreateBoneMenu()
         {
             Page menuMain = Menu.CreatePage("Advanced Avatar Control", Color.cyan);
-            blendShapes = menuMain.CreatePage("Blend Shapes", Color.green, maxElements: 9); //TODO temporarily set maxElements to 9 to fix https://github.com/yowchap/BoneLib/issues/70, though https://github.com/yowchap/BoneLib/issues/71 means elements on subpages aren't removed
-            Page meshRenderersCategory = blendShapes.CreatePage("Select Mesh Renderer", Color.green, maxElements: 9); //TODO temporarily set maxElements to 9 to fix https://github.com/yowchap/BoneLib/issues/70, though https://github.com/yowchap/BoneLib/issues/71 means elements on subpages aren't removed
+            // Max elements issue has been fixed based off of what I have seen in code modders soooooooooooooooooooooooooooooooooooooooooo
+            blendShapes = menuMain.CreatePage("Blend Shapes", Color.green);
+            Page meshRenderersCategory = blendShapes.CreatePage("Select Mesh Renderer", Color.green);
             Page eyeMovement = menuMain.CreatePage("Eye Movement", Color.green);
 
             blendShapes.CreateFunction("Refresh", Color.green, () => RefreshBlendShapes(blendShapes));
@@ -41,7 +42,7 @@ namespace AdvancedAvatarControl.BoneMenu
                     {
                         Title = "Opps!",
                         ShowTitleOnPopup = true,
-                        Message = $"You already have the ParlayerEyeController component silly!",
+                        Message = $"You already have the PlayerEyeController component silly!",
                         Type = NotificationType.Warning
                     });
                     return;
@@ -122,7 +123,7 @@ namespace AdvancedAvatarControl.BoneMenu
         {
             blendShapes.RemoveAll();
 
-            Page meshRenderersCategory = blendShapes.CreatePage("Select Mesh Renderer", Color.green, maxElements: 9); //TODO temporarily set maxElements to 9 to fix https://github.com/yowchap/BoneLib/issues/70, though https://github.com/yowchap/BoneLib/issues/71 means elements on subpages aren't removed
+            Page meshRenderersCategory = blendShapes.CreatePage("Select Mesh Renderer", Color.green);
 
             meshRenderersCategory.CreateFunction("Refresh", Color.green, () => RefreshMeshRenderers(meshRenderersCategory));
 
@@ -139,9 +140,9 @@ namespace AdvancedAvatarControl.BoneMenu
                     FloatElement floatElement = blendShapes.CreateFloat(blendShapeName, Color.white, weight, 10,
                         0, 100, (float value) =>
                         {
-                            if (MelonMod.FusionInstalled && NetworkInfo.HasServer)
+                            if (NetworkInfo.HasServer)
                             {
-                                FusionModule.Instance.SendBlendBoneMessage(value, i);
+                                FusionModule.Instance.SendBlendShapeMessage(value, i);
                             }
                             else
                             {
