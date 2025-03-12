@@ -3,9 +3,11 @@ using AdvancedAvatarControl.Patches;
 using BoneLib;
 using Il2CppSLZ.VRMK;
 using LabFusion.Data;
+using LabFusion.Entities;
 using LabFusion.Network;
 using LabFusion.Player;
 using LabFusion.Representation;
+using LabFusion.SDK.Modules;
 using UnityEngine;
 
 namespace AdvancedAvatarControl.Messages
@@ -81,7 +83,7 @@ namespace AdvancedAvatarControl.Messages
                             }
                             else
                             {
-                                PlayerRepUtilities.TryGetReferences(shortId, out RigReferenceCollection playerRep);
+                                PlayerRepUtilities.TryGetReferences(shortId, out RigRefs playerRep);
                                 avatar = playerRep.RigManager.avatar;
                             }
                             

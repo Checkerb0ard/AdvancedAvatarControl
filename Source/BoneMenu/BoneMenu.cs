@@ -23,8 +23,7 @@ namespace AdvancedAvatarControl.BoneMenu
 
         public static void CreateBoneMenu()
         {
-            Page menuMain = Menu.CreatePage("Advanced Avatar Control", Color.cyan);
-            // Max elements issue has been fixed based off of what I have seen in code modders soooooooooooooooooooooooooooooooooooooooooo
+            Page menuMain = Page.Root.CreatePage("Advanced Avatar Control", Color.cyan);
             blendShapes = menuMain.CreatePage("Blend Shapes", Color.green);
             Page meshRenderersCategory = blendShapes.CreatePage("Select Mesh Renderer", Color.green);
             Page eyeMovement = menuMain.CreatePage("Eye Movement", Color.green);
@@ -140,7 +139,7 @@ namespace AdvancedAvatarControl.BoneMenu
                     FloatElement floatElement = blendShapes.CreateFloat(blendShapeName, Color.white, weight, 10,
                         0, 100, (float value) =>
                         {
-                            if (NetworkInfo.HasServer)
+                            if (NetworkInfo.HasServer && FusionModule.Instance != null)
                             {
                                 FusionModule.Instance.SendBlendShapeMessage(value, i);
                             }

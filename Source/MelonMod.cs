@@ -20,7 +20,11 @@ namespace AdvancedAvatarControl
         public override void OnInitializeMelon()
         {
             Prefs.Initialize();
-            ModuleHandler.LoadModule(Assembly.GetExecutingAssembly());
+            if (FindMelon("LabFusion", "Lakatrazz") != null) LoadModule();
+        }
+        private static void LoadModule()
+        {
+            LabFusion.SDK.Modules.ModuleManager.RegisterModule<FusionModule>();
         }
 
         public override void OnLateInitializeMelon()
@@ -28,7 +32,8 @@ namespace AdvancedAvatarControl
             BoneMenu.BoneMenu.CreateBoneMenu();
             Hooking.OnLevelLoaded += AddEyeMovement;
             Hooking.OnSwitchAvatarPostfix += BoneMenu.BoneMenu.OnSwitchAvatar;
-            NetworkPlayer.OnNetworkRigCreated += AddRepEyeMovement;
+            FusionInstalled = HelperMethods.CheckIfAssemblyLoaded("labfusion");
+            if (FusionInstalled) NetworkPlayer.OnNetworkRigCreated += AddRepEyeMovement;
         }
         
         public void AddEyeMovement(LevelInfo levelInfo)
@@ -44,12 +49,12 @@ namespace AdvancedAvatarControl
 #endif            
         }
         
-        public void AddRepEyeMovement(NetworkPlayer networkPlayer, RigManager rigManager)
+        public void AddRepEyeMovement(NetworkPlayer player, RigManager playerRep)
         {
 #if DEBUG            
-            MelonLogger.Msg($"RepEyeController added to {rigManager.name}");
+            MelonLogger.Msg($"RepEyeController added to {playerRep.name}");
 #endif            
-            rigManager.physicsRig.m_head.gameObject.AddComponent<RepEyeController>();
+            playerRep.physicsRig.m_head.gameObject.AddComponent<RepEyeController>();
         }
     }
 }
